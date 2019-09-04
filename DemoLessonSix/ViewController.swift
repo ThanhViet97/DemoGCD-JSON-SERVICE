@@ -15,7 +15,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textGCD()
+//        textGCD()
+        testDispatchQueueGroup()
     }
     
     func textGCD() {
@@ -34,21 +35,76 @@ class ViewController: UIViewController {
             print("number_C: ", i)
         }
     }
+    
+    // MARK: - Test DispatchQueueGroup
+    func testDispatchQueueGroup()  {
+        //tạo 2 hàng đợi
+        let queue1 = DispatchQueue.global()
+        let queue2 = DispatchQueue.global()
+        //tạo 1 group
+        let group = DispatchGroup()
+        //add task vào queue1
+        queue1.async(group: group, qos: .background, flags: .enforceQoS) {
+            for _ in 0..<3 {
+                print("queue1")
+            }
+        }
+        //add task vào queue2
+        queue2.async(group: group, qos: .background, flags: .enforceQoS) {
+            for _ in 0..<4 {
+                print("queue2")
+            }
+        }
+        
+        //Làm 1 vài việc
+        print("1")
+        print("1")
+        print("1")
+        
+        //đợi những tác vụ trong group xong xuôi
+        group.wait()
+        
+        //group xong thì làm tiếp việc khác
+        print("2")
+    }
+    
     @IBAction func clickButtonAction(_ sender: Any) {
         // chạy dưới backgroup
       
-        let url = URL(string: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/hinh-nen-4k-dep-cho-may-tinh-tivi-smartphone.jpg")
-        let queue = DispatchQueue(label: "queue")
-        queue.async {
-            do {
-                let data = try Data(contentsOf: url!)
-                // trở về main thress để up load giao diện
+        let url = URL(string: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/hinh-nen-4k-dep-cho-may-tinh-tivi-smartphone.jpg")!
+//        let queue = DispatchQueue(label: "queue")
+//        queue.async {
+//            do {
+//                let data = try Data(contentsOf: url!)
+//                // trở về main thress để up load giao diện
+//                DispatchQueue.main.async {
+//                    self.imageViewLoad.image = UIImage(data: data)
+//                }
+//            } catch {}
+//        }
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let dowloadGreoup = DispatchGroup()
+            dowloadGreoup.enter()
+            do{
+                let data = try Data(contentsOf: url)
                 DispatchQueue.main.async {
                     self.imageViewLoad.image = UIImage(data: data)
                 }
+                dowloadGreoup.leave()
+                dowloadGreoup.wait()
+                
             } catch {}
+            DispatchQueue.main.async {
+                self.displayAlert()
+            }
         }
-        
+    }
+    func displayAlert(){
+        let alert = UIAlertController(title: "Download", message: "The image downloads successful.", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
 }
+
 
