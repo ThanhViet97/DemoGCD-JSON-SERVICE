@@ -10,11 +10,47 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var imageViewLoad: UIImageView!
+    @IBOutlet weak var clickButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        textGCD()
     }
-
-
+    
+    func textGCD() {
+        let queue = DispatchQueue(label: "queue")
+        let group = DispatchGroup()
+        
+        group.enter()
+        queue.async {
+            for i in 0...100 {
+                print("i = \(i)")
+            }
+            group.leave()
+        }
+        let result = group.wait(timeout: DispatchTime.now() + 1)
+        print(result)
+        
+        for j in 0...100 {
+            print("j = \(j)")
+        }
+    }
+    @IBAction func clickButtonAction(_ sender: Any) {
+        // chạy dưới backgroup
+      
+        let url = URL(string: "https://thuthuatnhanh.com/wp-content/uploads/2018/07/hinh-nen-4k-dep-cho-may-tinh-tivi-smartphone.jpg")
+        let queue = DispatchQueue(label: "queue")
+        queue.async {
+            do {
+                let data = try Data(contentsOf: url!)
+                // trở về main thress để up load giao diện
+                DispatchQueue.main.async {
+                    self.imageViewLoad.image = UIImage(data: data)
+                }
+            } catch {}
+        }
+        
+    }
 }
 
