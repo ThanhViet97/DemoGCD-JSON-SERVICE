@@ -16,7 +16,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        textGCD()
-        testDispatchQueueGroup()
+//        testDispatchQueueGroup()
+        testDispatchSemaphore()
     }
     
     func textGCD() {
@@ -105,6 +106,29 @@ class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    // MARK: - DispatchSemaphore
+    func testDispatchSemaphore() {
+        func lema(completionHandler: (() -> Void)?) {
+            let queue = DispatchQueue.global(qos: .background)
+            queue.async {
+                for i in 0..<3 {
+                    print(i)
+                }
+                completionHandler?()
+            }
+        }
+        print("start")
+        //tạo một semaphore có value là 0
+        let sema = DispatchSemaphore(value: 0)
+        lema {
+            print("Send sema")
+            sema.signal()
+        }
+        sema.wait()
+        print("end")
+    }
+    
 }
 
 
