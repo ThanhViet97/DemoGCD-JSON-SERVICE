@@ -20,20 +20,18 @@ class ViewController: UIViewController {
     
     func textGCD() {
         let queue = DispatchQueue(label: "queue")
-        let group = DispatchGroup()
-        
-        group.enter()
-        queue.async {
-            for i in 0...100 {
-                print("i = \(i)")
+        queue.sync {
+            for i in 0..<5 {
+                print("number_A: ", i)
             }
-            group.leave()
         }
-        let result = group.wait(timeout: DispatchTime.now() + 1)
-        print(result)
-        
-        for j in 0...100 {
-            print("j = \(j)")
+        queue.async {
+            for i in 10..<15 {
+                print("number_B: ", i)
+            }
+        }
+        for i in 20..<25 {
+            print("number_C: ", i)
         }
     }
     @IBAction func clickButtonAction(_ sender: Any) {
