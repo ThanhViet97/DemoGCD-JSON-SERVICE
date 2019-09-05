@@ -156,9 +156,6 @@ class ViewController: UIViewController {
         }
         queue.addOperation(operation4)
     }
-    @IBAction func cancelAction(_ sender: AnyObject) {
-//        self.queue.cancelAllOperations()
-    }
   
 // MARK: - method
     // download image function
@@ -198,6 +195,33 @@ class ViewController: UIViewController {
         }
         sema.wait()
         print("end")
+    }
+    @IBAction func cancelAction(_ sender: AnyObject) {
+        
+        let jsonUrdString = "https://api.github.com/users/google/repos"
+        guard let url = URL(string: jsonUrdString) else
+        {return}
+        
+        URLSession.shared.dataTask(with: url) { (data, respont, erroi) in
+            
+            guard let data = data else { return }
+//
+//            let dataAsString = String(data: data,encoding: .utf8)
+//            print(dataAsString)
+            do {
+                let githubData = try JSONDecoder().decode([GithubData].self, from: data)
+                
+
+                print(githubData[1].owner!.id!)
+            } catch let jsonErr {
+                print(jsonErr)
+            }
+            
+        }.resume()
+        
+//        let myData = dataJsion(id: 1, node_id: "note", name: "Viet", full_name: "Phan Thanh Viet")
+//        print(myData)
+        
     }
     
     
