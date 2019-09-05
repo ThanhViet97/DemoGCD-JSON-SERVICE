@@ -20,11 +20,13 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jvx-MN-hhY">
                                 <rect key="frame" x="0.0" y="121" width="414" height="309"/>
+                                <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="20D-p8-zDZ">
                                 <rect key="frame" x="161" y="438" width="99" height="33"/>
                                 <color key="backgroundColor" red="0.82869839670000001" green="0.1841543913" blue="0.14191114899999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" secondItem="20D-p8-zDZ" secondAttribute="height" multiplier="3:1" id="AIO-la-J2f"/>
                                     <constraint firstAttribute="height" constant="33" id="EU0-qQ-GDg"/>
                                 </constraints>
                                 <state key="normal" title="Button">
@@ -34,22 +36,59 @@
                                     <action selector="clickButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NyQ-QL-5CI"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVC-93-noY">
+                                <rect key="frame" x="39" y="533" width="103" height="47"/>
+                                <color key="backgroundColor" red="0.97696286440000002" green="0.51865494249999999" blue="0.51718646290000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Dowload"/>
+                                <connections>
+                                    <action selector="dowloadAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="caf-Kg-hrn"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SLt-Ff-NZ1">
+                                <rect key="frame" x="39" y="597" width="346" height="265"/>
+                                <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sSF-1e-aZY">
+                                <rect key="frame" x="282" y="533" width="103" height="47"/>
+                                <color key="backgroundColor" red="1" green="0.69527607589999996" blue="0.211626388" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="47" id="M7O-XM-CbI"/>
+                                    <constraint firstAttribute="width" constant="103" id="pUj-d1-wfL"/>
+                                </constraints>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zFw-v9-7wV"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="JVC-93-noY" firstAttribute="height" secondItem="sSF-1e-aZY" secondAttribute="height" id="0Pi-kM-ldw"/>
+                            <constraint firstItem="sSF-1e-aZY" firstAttribute="trailing" secondItem="SLt-Ff-NZ1" secondAttribute="trailing" id="7Wp-G4-N2M"/>
+                            <constraint firstItem="JVC-93-noY" firstAttribute="bottom" secondItem="sSF-1e-aZY" secondAttribute="bottom" id="9xu-b9-gFL"/>
                             <constraint firstItem="20D-p8-zDZ" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" constant="1.5" id="A9L-6X-QIP"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="20D-p8-zDZ" secondAttribute="trailing" constant="154" id="ABZ-uL-x0g"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Jvx-MN-hhY" secondAttribute="trailing" id="CRD-Nc-wCn"/>
                             <constraint firstItem="Jvx-MN-hhY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Chq-gg-iMB"/>
+                            <constraint firstItem="SLt-Ff-NZ1" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="GqZ-WV-TO6"/>
+                            <constraint firstItem="JVC-93-noY" firstAttribute="leading" secondItem="SLt-Ff-NZ1" secondAttribute="leading" id="IRh-N5-nBd"/>
                             <constraint firstItem="20D-p8-zDZ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="161" id="J0K-qR-tTi"/>
                             <constraint firstItem="Jvx-MN-hhY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="77" id="S7T-0v-RN0"/>
+                            <constraint firstItem="sSF-1e-aZY" firstAttribute="top" secondItem="Jvx-MN-hhY" secondAttribute="bottom" constant="103" id="WMj-OA-k9C"/>
+                            <constraint firstItem="SLt-Ff-NZ1" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="39" id="bgb-Tu-peM"/>
+                            <constraint firstItem="SLt-Ff-NZ1" firstAttribute="top" secondItem="sSF-1e-aZY" secondAttribute="bottom" constant="17" id="cFb-ZQ-UFC"/>
+                            <constraint firstItem="JVC-93-noY" firstAttribute="width" secondItem="sSF-1e-aZY" secondAttribute="width" id="cQj-ui-UNb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SLt-Ff-NZ1" secondAttribute="trailing" constant="29" id="e6V-wT-AX5"/>
                             <constraint firstItem="20D-p8-zDZ" firstAttribute="top" secondItem="Jvx-MN-hhY" secondAttribute="bottom" constant="8" symbolic="YES" id="msO-gp-Iqd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="cancelButton" destination="sSF-1e-aZY" id="QzP-00-G6k"/>
                         <outlet property="clickButton" destination="20D-p8-zDZ" id="0O6-v7-9xD"/>
+                        <outlet property="dowloadButton" destination="JVC-93-noY" id="gdy-71-orf"/>
                         <outlet property="imageViewLoad" destination="Jvx-MN-hhY" id="p91-VV-nz7"/>
+                        <outlet property="operationImage" destination="SLt-Ff-NZ1" id="RY4-8V-8Jl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
