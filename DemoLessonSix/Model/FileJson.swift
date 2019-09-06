@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct GithubData:Decodable {
+struct GithubData : Decodable {
     var id : Int?
     var node_id : String?
     var name : String?
@@ -30,4 +30,23 @@ struct Owner: Decodable {
     var login: String?
     var id : Int?
     var gravatar_id : String?
+}
+
+func getInforList(onSuccess : @escaping (_ listInfor : [GithubData]?) -> Void )  {
+    let jsonUrdString = "https://api.github.com/users/google/repos"
+    
+    guard let url = URL(string: jsonUrdString) else
+    {return}
+    URLSession.shared.dataTask(with: url) { (data, respont, erroi) in
+        guard let data = data else { return }
+        //
+        //            let dataAsString = String(data: data,encoding: .utf8)
+        //            print(dataAsString)
+        do {
+            let githubData = try JSONDecoder().decode([GithubData].self, from: data)
+            onSuccess(githubData)
+        } catch let jsonErr {
+            print(jsonErr)
+        }
+        }.resume()
 }
