@@ -10,15 +10,15 @@ import Foundation
 
 struct GithubData : Decodable {
     var id : Int?
-    var node_id : String?
+    var nodeId : String?
     var name : String?
-    var full_name : String?
+    var fullName : String?
     var owner : Owner?
-    var html_url : String?
+    var htmlUrl : String?
 //
 //    init(json: [String: Any]) {
 //        id = json["id"] as? Int ?? 1
-//        node_id = json["node_id"] as? String ?? ""
+//        nodeId = json["node_id"] as? String ?? ""
 //        name = json["name"] as? String ?? ""
 //        full_name = json["full_name"] as? String ?? ""
 //        owner = json["owner"] as? Array ?? []
@@ -29,7 +29,9 @@ struct GithubData : Decodable {
 struct Owner: Decodable {
     var login: String?
     var id : Int?
-    var gravatar_id : String?
+    var gravatarId : String?
+    
+    
 }
 
 func getInforList(onSuccess : @escaping (_ listInfor : [GithubData]?) -> Void )  {
@@ -37,14 +39,14 @@ func getInforList(onSuccess : @escaping (_ listInfor : [GithubData]?) -> Void ) 
     
     guard let url = URL(string: jsonUrdString) else
     {return}
-    URLSession.shared.dataTask(with: url) { (data, respont, erroi) in
+    URLSession.shared.dataTask(with: url) { (data, respont, err) in
         guard let data = data else { return }
-        //
-        //            let dataAsString = String(data: data,encoding: .utf8)
-        //            print(dataAsString)
         do {
-            let githubData = try JSONDecoder().decode([GithubData].self, from: data)
+            let decoder = JSONDecoder()
+            decoder.keyDecodingStrategy = .convertFromSnakeCase
+            let githubData = try decoder.decode([GithubData].self, from: data)
             onSuccess(githubData)
+            
         } catch let jsonErr {
             print(jsonErr)
         }

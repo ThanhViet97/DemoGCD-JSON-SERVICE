@@ -35,7 +35,7 @@ extension ListInforViewController : UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListInforTableViewCell.indentifier, for: indexPath) as! ListInforTableViewCell
-        cell.ContentLable.text = githubData[indexPath.row].node_id
+        cell.ContentLable.text = githubData[indexPath.row].nodeId
         cell.IDLable.text = String(githubData[indexPath.row].id!)
         return cell
     }
